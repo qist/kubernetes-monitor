@@ -1,10 +1,25 @@
-apiVersion: extensions/v1beta1
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nanny-config
+  namespace: default
+data:
+  NannyConfiguration: |-
+    apiVersion: nannyconfig/v1alpha1
+    kind: NannyConfiguration
+---
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
+  labels:
+    app: kube-state-metrics
   name: kube-state-metrics
   namespace: monitoring
 spec:
-  replicas: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-state-metrics
   template:
     metadata:
       labels:
@@ -13,13 +28,54 @@ spec:
       serviceAccountName: kube-state-metrics
       containers:
       - name: kube-state-metrics
-        image: googlecontainer/kube-state-metrics:v0.5.0
+        image: googlecontainer/kube-state-metrics:v1.5.0
         ports:
-        - containerPort: 8080
+        - name: http-metrics
+          containerPort: 8080
+        - name: telemetry
+          containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - name: sys-time
+          mountPath: /etc/localtime
+      - name: addon-resizer
+        image: docker.qkagame.com/addon-resizer:1.8.4
+        resources:
+          limits:
+            cpu: 100m
+            memory: 30Mi
+          requests:
+            cpu: 100m
+            memory: 30Mi
+        env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        command:
+          - /pod_nanny
+          - --container=kube-state-metrics
+          - --cpu=100m
+          - --extra-cpu=1m
+          - --memory=200Mi
+          - --extra-memory=2Mi
+          - --threshold=5
+          - --deployment=kube-state-metrics
         volumeMounts:
         - name: sys-time
           mountPath: /etc/localtime
       volumes:
-        - name: sys-time
-          hostPath:
-            path: /etc/localtime
+       - name: sys-time
+         hostPath:
+           path: /usr/share/zoneinfo/Asia/Shanghai
+      nodeSelector:
+        beta.kubernetes.io/os: linux

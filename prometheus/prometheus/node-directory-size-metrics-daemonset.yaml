@@ -75,4 +75,4 @@ spec:
           medium: Memory
       - name: sys-time
         hostPath:
-          path: /etc/localtime
+          path: /usr/share/zoneinfo/Asia/Shanghai

@@ -14,20 +14,47 @@ spec:
         app: prometheus
         component: node-exporter
     spec:
+      hostNetwork: true
+      hostPID: true
       containers:
       - image: prom/node-exporter:v0.17.0
+        args:
+        - "--path.procfs=/host/proc"
+        - "--path.sysfs=/host/sys"
+        - "--collector.filesystem.ignored-mount-points=^/(dev|proc|sys|/apps/docker/.+)($|/)"
+        - "--collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs)$"
         name: prometheus-node-exporter
         ports:
         - name: prom-node-exp
           #^ must be an IANA_SVC_NAME (at most 15 characters, ..)
           containerPort: 9100
           hostPort: 9100
+        resources:
+          requests:
+            memory: 30Mi
+            cpu: 102m
+          limits:
+            memory: 50Mi
+            cpu: 250m
         volumeMounts:
         - name: sys-time
           mountPath: /etc/localtime
+        - name: proc
+          readOnly:  true
+          mountPath: /host/proc
+        - name: sys
+          readOnly: true
+          mountPath: /host/sys
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
       volumes:
         - name: sys-time
           hostPath:
-            path: /etc/localtime
-      hostNetwork: true
-      hostPID: true
+            path: /usr/share/zoneinfo/Asia/Shanghai
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: sys
+          hostPath:
+            path: /sys

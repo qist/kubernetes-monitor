@@ -171,6 +171,11 @@ data:
         scheme: http
         static_configs:
         - targets: ['192.168.2.250:10252', '192.168.2.251:10252', '192.168.2.252:10252']
+      - job_name: 'ceph_exporter'
+        static_configs:
+        - targets: ['192.168.2.79:9128']
+          labels:
+            alias: ceph_exporter
 
 
 
