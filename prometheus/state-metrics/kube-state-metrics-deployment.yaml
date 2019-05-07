@@ -79,3 +79,4 @@ spec:
            path: /usr/share/zoneinfo/Asia/Shanghai
       nodeSelector:
         beta.kubernetes.io/os: linux
+      serviceAccountName: kube-state-metrics

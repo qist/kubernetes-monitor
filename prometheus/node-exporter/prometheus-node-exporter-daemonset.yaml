@@ -1,18 +1,18 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: DaemonSet
 metadata:
-  name: prometheus-node-exporter
-  namespace: monitoring
   labels:
-    app: prometheus
-    component: node-exporter
+    app: node-exporter
+  name: node-exporter
+  namespace: monitoring
 spec:
+  selector:
+    matchLabels:
+      app: node-exporter
   template:
     metadata:
-      name: prometheus-node-exporter
       labels:
-        app: prometheus
-        component: node-exporter
+        app: node-exporter   
     spec:
       hostNetwork: true
       hostPID: true
@@ -23,9 +23,9 @@ spec:
         - "--path.sysfs=/host/sys"
         - "--collector.filesystem.ignored-mount-points=^/(dev|proc|sys|/apps/docker/.+)($|/)"
         - "--collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs)$"
-        name: prometheus-node-exporter
+        name: node-exporter
         ports:
-        - name: prom-node-exp
+        - name: http
           #^ must be an IANA_SVC_NAME (at most 15 characters, ..)
           containerPort: 9100
           hostPort: 9100
@@ -45,6 +45,10 @@ spec:
         - name: sys
           readOnly: true
           mountPath: /host/sys
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+      serviceAccountName: node-exporter
       tolerations:
       - effect: NoSchedule
         operator: Exists

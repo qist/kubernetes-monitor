@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: etcd
+  name: etcd
+  namespace: monitoring
+spec:
+  clusterIP: None
+  ports:
+  - name: https-metrics
+    port: 2379
+    protocol: TCP
+    targetPort: 2379
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    k8s-app: etcd
+  name: etcd
+  namespace: monitoring
+subsets:
+- addresses:
+  - ip: 192.168.2.247
+    nodeName: etcd-monit0
+  - ip: 192.168.2.248
+    nodeName: etcd-monit1
+  - ip: 192.168.2.249
+    nodeName: etcd-monit2
+  ports:
+  - name: https-metrics
+    port: 2379
+    protocol: TCP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: etcd
+  name: etcd
+  namespace: monitoring
+spec:
+  endpoints:
+  - interval: 10s
+    port: https-metrics
+    scheme: https
+    tlsConfig:
+      caFile: /etc/prometheus/secrets/etcd-certs/etcd-ca.pem
+      certFile: /etc/prometheus/secrets/etcd-certs/etcd_client.pem
+      keyFile: /etc/prometheus/secrets/etcd-certs/etcd_client-key.pem
+      insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+    - monitoring
+  selector:
+    matchLabels:
+      k8s-app: etcd
