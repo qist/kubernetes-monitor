@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_STAGING",
-      "label": "staging",
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -14,25 +14,25 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.4.0"
+      "version": "6.1.4"
     },
     {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
-      "version": "5.0.0"
+      "version": ""
     },
     {
       "type": "panel",
       "id": "heatmap",
       "name": "Heatmap",
-      "version": "5.0.0"
+      "version": ""
     },
     {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
-      "version": "5.0.0"
+      "version": "1.0.0"
     }
   ],
   "annotations": {
@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1544143515552,
+  "iteration": 1557233178384,
   "links": [],
   "panels": [
     {
@@ -76,12 +76,14 @@
         "y": 0
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 27,
       "legend": {
         "show": false
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum by (le) (increase(kube_router_controller_iptables_sync_time_bucket{instance=~\"$selnode\"}[$interval]))",
@@ -136,12 +138,14 @@
         "y": 0
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 28,
       "legend": {
         "show": false
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum by (le) (increase(kube_router_controller_ipvs_services_sync_time_bucket{instance=~\"$selnode\"}[$interval]))",
@@ -196,12 +200,14 @@
         "y": 0
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 31,
       "legend": {
         "show": false
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum by (le) (increase(kube_router_controller_policy_chains_sync_time_bucket{instance=~\"$selnode\"}[$interval]))",
@@ -256,12 +262,14 @@
         "y": 5
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 30,
       "legend": {
         "show": false
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum by (le) (increase(kube_router_controller_ipvs_metrics_export_time_bucket{instance=~\"$selnode\"}[$interval]))",
@@ -316,12 +324,14 @@
         "y": 5
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 29,
       "legend": {
         "show": false
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum by (le) (increase(kube_router_controller_bgp_internal_peers_sync_time_bucket{instance=~\"$selnode\"}[$interval]))",
@@ -376,12 +386,14 @@
         "y": 5
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 32,
       "legend": {
         "show": false
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "sum by (le) (increase(kube_router_controller_routes_sync_time_bucket{instance=~\"$selnode\"}[$interval]))",
@@ -1532,7 +1544,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
     "Kubernetes",
@@ -1543,11 +1555,13 @@
     "list": [
       {
         "current": {
-          "text": "staging",
-          "value": "staging"
+          "text": "Prometheus",
+          "value": "Prometheus"
         },
         "hide": 0,
+        "includeAll": false,
         "label": "Datasource",
+        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
@@ -1559,7 +1573,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${DS_STAGING}",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(kube_router_service_total_connections, svc_namespace)",
         "hide": 0,
         "includeAll": true,
@@ -1581,7 +1595,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${DS_STAGING}",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -1702,5 +1716,5 @@
   "timezone": "browser",
   "title": "kube-router",
   "uid": "Xw9Eyxciz",
-  "version": 16
+  "version": 1
 }
