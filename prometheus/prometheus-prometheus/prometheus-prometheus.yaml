@@ -19,7 +19,7 @@ spec:
   - etcd-certs
   resources:
     requests:
-      memory: 400Mi
+      memory: 2048Mi
   retention: 7d
   storage:
     volumeClaimTemplate:
