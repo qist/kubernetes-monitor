@@ -1,156 +1,48 @@
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
 metadata:
   labels:
     prometheus: k8s
-  name: prometheus-k8s
+  name: k8s
   namespace: monitoring
 spec:
-  podManagementPolicy: Parallel
+  alerting:
+    alertmanagers:
+    - name: alertmanager-main
+      namespace: monitoring
+      port: web
+  baseImage: quay.io/prometheus/prometheus
+  nodeSelector:
+    beta.kubernetes.io/os: linux
   replicas: 2
-  revisionHistoryLimit: 10
-  volumeClaimTemplates:
-  - metadata:
-      annotations:
-        volume.beta.kubernetes.io/storage-class: nfs-storage
-      name: prometheus-k8s-db
-    spec:
-      accessModes:
-      - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-  selector:
-    matchLabels:
-      app: prometheus
-      prometheus: k8s
-  serviceName: prometheus-operated
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: prometheus
-        prometheus: k8s
-    spec:
-      containers:
-      - args:
-        - --web.console.templates=/etc/prometheus/consoles
-        - --web.console.libraries=/etc/prometheus/console_libraries
-        - --config.file=/etc/prometheus/config_out/prometheus.env.yaml
-        - --storage.tsdb.path=/prometheus
-        - --storage.tsdb.retention=7d
-        - --web.enable-lifecycle
-        - --storage.tsdb.no-lockfile
-        - --web.route-prefix=/
-        image: quay.io/prometheus/prometheus:v2.9.2
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 6
-          httpGet:
-            path: /-/healthy
-            port: web
-            scheme: HTTP
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 3
-        name: prometheus
-        ports:
-        - containerPort: 9090
-          name: web
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 120
-          httpGet:
-            path: /-/ready
-            port: web
-            scheme: HTTP
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 3
+  secrets:
+  - etcd-certs
+  resources:
+    requests:
+      memory: 400Mi
+  retention: 7d
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        metadata:
+          annotations:
+            volume.alpha.kubernetes.io/storage-class: nfs-storage
+          labels:
+            prometheus: ingest-webrtc
         resources:
           requests:
-            memory: 2048Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /etc/prometheus/config_out
-          name: config-out
-          readOnly: true
-        - mountPath: /prometheus
-          name: prometheus-k8s-db
-        - mountPath: /etc/prometheus/rules/prometheus-k8s-rulefiles-0
-          name: prometheus-k8s-rulefiles-0
-        - mountPath: /etc/prometheus/secrets/etcd-certs
-          name: secret-etcd-certs
-          readOnly: true
-      - args:
-        - --log-format=logfmt
-        - --reload-url=http://localhost:9090/-/reload
-        - --config-file=/etc/prometheus/config/prometheus.yaml.gz
-        - --config-envsubst-file=/etc/prometheus/config_out/prometheus.env.yaml
-        command:
-        - /bin/prometheus-config-reloader
-        env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.name
-        image: quay.io/coreos/prometheus-config-reloader:v0.29.0
-        imagePullPolicy: IfNotPresent
-        name: prometheus-config-reloader
-        resources:
-          limits:
-            cpu: 50m
-            memory: 50Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /etc/prometheus/config
-          name: config
-        - mountPath: /etc/prometheus/config_out
-          name: config-out
-      - args:
-        - --webhook-url=http://localhost:9090/-/reload
-        - --volume-dir=/etc/prometheus/rules/prometheus-k8s-rulefiles-0
-        image: quay.io/coreos/configmap-reload:v0.0.1
-        imagePullPolicy: IfNotPresent
-        name: rules-configmap-reloader
-        resources:
-          limits:
-            cpu: 100m
-            memory: 25Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /etc/prometheus/rules/prometheus-k8s-rulefiles-0
-          name: prometheus-k8s-rulefiles-0
-      dnsPolicy: ClusterFirst
-      nodeSelector:
-        beta.kubernetes.io/os: linux
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext:
-        fsGroup: 2000
-        runAsNonRoot: true
-        runAsUser: 1000
-      serviceAccount: prometheus-k8s
-      serviceAccountName: prometheus-k8s
-      terminationGracePeriodSeconds: 600
-      volumes:
-      - name: config
-        secret:
-          defaultMode: 420
-          secretName: prometheus-k8s
-      - emptyDir: {}
-        name: config-out
-      - configMap:
-          defaultMode: 420
-          name: prometheus-k8s-rulefiles-0
-        name: prometheus-k8s-rulefiles-0
-      - name: secret-etcd-certs
-        secret:
-          defaultMode: 420
-          secretName: etcd-certs
-  updateStrategy:
-    type: RollingUpdate
+            storage: 20Gi
+  ruleSelector:
+    matchLabels:
+      prometheus: k8s
+      role: alert-rules
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+  version: v2.9.2
