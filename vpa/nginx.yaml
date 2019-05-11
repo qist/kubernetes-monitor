@@ -1,0 +1,32 @@
+apiVersion: autoscaling.k8s.io/v1beta2
+kind: VerticalPodAutoscaler
+metadata:
+  name: my-rec-vpa
+spec:
+  targetRef:
+    apiVersion: "extensions/v1beta1"
+    kind: Deployment
+    name: my-rec-deployment
+  updatePolicy:
+    updateMode: "Auto"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-rec-deployment
+  labels:
+    purpose: try-recommend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        purpose: try-recommend
+    spec:
+      containers:
+      - name: my-rec-container
+        image: nginx:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
