@@ -6,27 +6,42 @@ spec:
   targetRef:
     apiVersion: "extensions/v1beta1"
     kind: Deployment
-    name: my-rec-deployment
+    name: nginx-controller
   updatePolicy:
     updateMode: "Auto"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: my-rec-deployment
-  labels:
-    purpose: try-recommend
+  name: nginx-controller
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
   template:
     metadata:
       labels:
-        purpose: try-recommend
+        app: nginx
     spec:
       containers:
-      - name: my-rec-container
-        image: nginx:latest
-        resources:
-          requests:
-            cpu: 100m
-            memory: 50Mi
+        - name: nginx
+          image: nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 20Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-controller
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: nginx
