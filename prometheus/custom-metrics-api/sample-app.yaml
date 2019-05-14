@@ -2,6 +2,7 @@ kind: ServiceMonitor
 apiVersion: monitoring.coreos.com/v1
 metadata:
   name: sample-app
+  namespace: monitoring
   labels:
     app: sample-app
 spec:
@@ -13,7 +14,7 @@ spec:
     interval: 5s
   namespaceSelector:
     matchNames:
-    - kube-system
+    - default
 ---
 apiVersion: v1
 kind: Service

@@ -22,7 +22,7 @@ spec:
         dashboard: kubernetes-dashboard
       containers:
       - name: heapster
-        image: docker.qkagame.com/heapster-amd64:v1.5.4
+        image: juestnow/heapster-amd64:v1.5.4
         imagePullPolicy: IfNotPresent
         command:
         - /heapster

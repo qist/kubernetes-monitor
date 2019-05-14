@@ -15,7 +15,7 @@ spec:
         component: core
     spec:
       containers:
-      - image: docker.qkagame.com/grafana:6.1.4
+      - image: juestnow/grafana:6.1.4
         name: grafana-core
         imagePullPolicy: IfNotPresent
         # env:
@@ -49,8 +49,6 @@ spec:
           mountPath: /etc/grafana/
         - name: grafana-settings
           mountPath: /var/lib/grafana
-        - name: sys-time
-          mountPath: /etc/localtime
       volumes:
         - name: grafana-etc-volume
           configMap:
@@ -58,6 +56,3 @@ spec:
         - name: grafana-settings
           persistentVolumeClaim:
             claimName: grafana-pvc
-        - name: sys-time
-          hostPath:
-            path: /usr/share/zoneinfo/Asia/Shanghai

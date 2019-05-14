@@ -24,7 +24,7 @@ metadata:
   namespace: monitoring
 subsets:
 - addresses:
-  - ip: 192.168.1.121
+  - ip: 192.168.1.169
     nodeName: ceph-monit
   ports:
   - name: api
@@ -40,8 +40,11 @@ metadata:
   namespace: monitoring
 spec:
   endpoints:
-  - interval: 10s
+  - honorLabels: true
+    interval: 10s
+    path: /prometheus
     port: api
+    scheme: http
   namespaceSelector:
     matchNames:
     - monitoring

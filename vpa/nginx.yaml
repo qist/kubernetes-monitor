@@ -1,4 +1,4 @@
-apiVersion: autoscaling.k8s.io/v1beta2
+apiVersion: autoscaling.k8s.io/v1beta1
 kind: VerticalPodAutoscaler
 metadata:
   name: my-rec-vpa
@@ -33,7 +33,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 20Mi
+              memory: 50Mi
 ---
 apiVersion: v1
 kind: Service

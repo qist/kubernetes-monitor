@@ -37,8 +37,6 @@ spec:
             memory: 50Mi
             cpu: 250m
         volumeMounts:
-        - name: sys-time
-          mountPath: /etc/localtime
         - name: proc
           readOnly:  true
           mountPath: /host/proc
@@ -53,9 +51,6 @@ spec:
       - effect: NoSchedule
         operator: Exists
       volumes:
-        - name: sys-time
-          hostPath:
-            path: /usr/share/zoneinfo/Asia/Shanghai
         - name: proc
           hostPath:
             path: /proc

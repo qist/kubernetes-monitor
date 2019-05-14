@@ -20,7 +20,7 @@ spec:
       serviceAccountName: vpa-updater
       containers:
         - name: updater
-          image: juestnow/vpa-updater:0.5.1
+          image: juestnow/vpa-updater:0.5.0
           imagePullPolicy: Always
           resources:
             limits:

@@ -1,11 +1,11 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: test-pod
+  name: test-rbd-pod
 spec:
   containers:
-  - name: test-pod
-    image: docker.qkagame.com/google_containers/busybox:1.24
+  - name: test-rbd-pod
+    image: juestnow/busybox:1.24
     command:
     - "/bin/sh"
     args:
@@ -18,4 +18,4 @@ spec:
   volumes:
   - name: pvc
     persistentVolumeClaim:
-      claimName: claim1
+      claimName: rbd-claim1

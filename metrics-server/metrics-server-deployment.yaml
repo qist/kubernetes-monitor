@@ -36,7 +36,7 @@ spec:
         emptyDir: {}
       containers:
       - name: metrics-server
-        image: docker.qkagame.com/metrics-server-amd64:v0.3.2
+        image: juestnow/metrics-server-amd64:v0.3.2
         imagePullPolicy: Always
         command:
         - /metrics-server

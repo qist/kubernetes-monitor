@@ -20,12 +20,14 @@ spec:
       serviceAccountName: vpa-recommender
       containers:
       - name: recommender
-        image: juestnow/vpa-recommender:0.5.1
+        image: juestnow/vpa-recommender:0.5.0
         imagePullPolicy: Always
         args:
-          - "--v=2"
+          - "--v=4"
           - "--stderrthreshold=info"
+          - "--storage=prometheus"
           - "--prometheus-address=http://prometheus-k8s.monitoring.svc:9090"
+          - "--prometheus-cadvisor-job-name=kubelet"
         resources:
           limits:
             cpu: 200m
@@ -34,4 +36,4 @@ spec:
             cpu: 50m
             memory: 500Mi
         ports:
-        - containerPort: 8942
+        - containerPort: 8080

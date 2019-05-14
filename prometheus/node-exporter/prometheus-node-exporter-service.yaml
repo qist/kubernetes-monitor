@@ -13,8 +13,5 @@ spec:
   - name: http
     port: 9100
     targetPort: http
-  - name: http-self
-    port: 8080
-    protocol: TCP
   selector:
     app: node-exporter

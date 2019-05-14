@@ -40,11 +40,8 @@ spec:
             port: 8080
           initialDelaySeconds: 10
           timeoutSeconds: 10
-        volumeMounts:
-        - name: sys-time
-          mountPath: /etc/localtime
       - name: addon-resizer
-        image: docker.qkagame.com/addon-resizer:1.8.4
+        image: juestnow/addon-resizer:1.8.4
         resources:
           limits:
             cpu: 100m
@@ -70,13 +67,6 @@ spec:
           - --extra-memory=2Mi
           - --threshold=5
           - --deployment=kube-state-metrics
-        volumeMounts:
-        - name: sys-time
-          mountPath: /etc/localtime
-      volumes:
-       - name: sys-time
-         hostPath:
-           path: /usr/share/zoneinfo/Asia/Shanghai
       nodeSelector:
         beta.kubernetes.io/os: linux
       serviceAccountName: kube-state-metrics

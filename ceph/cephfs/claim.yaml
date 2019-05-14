@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: claim1
+  name: cephfs-claim1
 spec:
   storageClassName: cephfs
   accessModes:
