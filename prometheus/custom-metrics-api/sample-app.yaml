@@ -49,6 +49,13 @@ spec:
       containers:
       - image: luxas/autoscale-demo:v0.1.2
         name: metrics-provider
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
         ports:
         - name: http
           containerPort: 8080

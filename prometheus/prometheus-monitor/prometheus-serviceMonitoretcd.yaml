@@ -25,11 +25,11 @@ metadata:
 subsets:
 - addresses:
   - ip: 192.168.2.247
-    nodeName: etcd-monit0
   - ip: 192.168.2.248
-    nodeName: etcd-monit1
   - ip: 192.168.2.249
-    nodeName: etcd-monit2
+  - ip: 192.168.2.57
+  - ip: 192.168.2.91
+  - ip: 192.168.2.92
   ports:
   - name: https-metrics
     port: 2379

@@ -11,7 +11,7 @@ spec:
   clusterIP: None
   ports:
   - name: http-self
-    port: 8080
+    port: 20244
     protocol: TCP
   selector:
     app: node-exporter
