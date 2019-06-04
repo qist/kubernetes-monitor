@@ -67,11 +67,11 @@
     ]
   },
   "description": "",
-  "editable": true,
+  "editable": false,
   "gnetId": 8919,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1557233039391,
+  "iteration": 1559613678836,
   "links": [],
   "panels": [
     {
@@ -2184,7 +2184,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
@@ -2295,7 +2295,7 @@
         "allValue": null,
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "label_values(node_uname_info{sysname='$env'},nodename)",
         "hide": 0,
         "includeAll": false,
         "label": "主机名",
@@ -2303,7 +2303,7 @@
         "multiFormat": "regex values",
         "name": "name",
         "options": [],
-        "query": "label_values(node_exporter_build_info{env='$env'},name)",
+        "query": "label_values(node_uname_info{sysname='$env'},nodename)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2319,7 +2319,7 @@
         "allValue": null,
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "",
+        "definition": "label_values(node_uname_info{nodename='$name'},instance)",
         "hide": 0,
         "includeAll": false,
         "label": "节点",
@@ -2327,7 +2327,7 @@
         "multiFormat": "regex values",
         "name": "node",
         "options": [],
-        "query": "label_values(node_exporter_build_info{name='$name'},instance)",
+        "query": "label_values(node_uname_info{nodename='$name'},instance)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2363,7 +2363,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -2395,5 +2395,5 @@
   "timezone": "browser",
   "title": "Node",
   "uid": "9CWBz0bik",
-  "version": 11
+  "version": 26
 }
