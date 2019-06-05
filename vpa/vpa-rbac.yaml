@@ -22,6 +22,7 @@ rules:
     resources:
       - pods
       - nodes
+      - limitranges
     verbs:
       - get
       - list
@@ -35,6 +36,15 @@ rules:
       - list
       - watch
       - create
+  - apiGroups:
+      - "poc.autoscaling.k8s.io"
+    resources:
+      - verticalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
   - apiGroups:
       - "autoscaling.k8s.io"
     resources:
@@ -50,6 +60,17 @@ kind: ClusterRole
 metadata:
   name: system:vpa-checkpoint-actor
 rules:
+  - apiGroups:
+      - "poc.autoscaling.k8s.io"
+    resources:
+      - verticalpodautoscalercheckpoints
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - patch
+      - delete
   - apiGroups:
       - "autoscaling.k8s.io"
     resources:
@@ -211,6 +232,7 @@ rules:
       - pods
       - configmaps
       - nodes
+      - limitranges
     verbs:
       - get
       - list
@@ -224,6 +246,14 @@ rules:
       - delete
       - get
       - list
+  - apiGroups:
+      - "poc.autoscaling.k8s.io"
+    resources:
+      - verticalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
   - apiGroups:
       - "autoscaling.k8s.io"
     resources:
