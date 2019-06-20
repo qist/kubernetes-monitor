@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.1.4"
+      "version": "6.2.2"
     },
     {
       "type": "panel",
@@ -43,7 +43,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1557233255560,
+  "iteration": 1560998233291,
   "links": [],
   "panels": [
     {
@@ -87,6 +87,7 @@
       "linewidth": 0,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -190,6 +191,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "pageSize": null,
       "percentage": false,
       "pointradius": 5,
@@ -433,6 +435,7 @@
       "linewidth": 0,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -536,6 +539,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "pageSize": null,
       "percentage": false,
       "pointradius": 5,

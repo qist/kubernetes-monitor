@@ -5,7 +5,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.1.4"
+      "version": "6.2.2"
     },
     {
       "type": "panel",
@@ -37,7 +37,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1557233326879,
+  "iteration": 1560998357805,
   "links": [],
   "panels": [
     {
@@ -81,6 +81,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -168,6 +169,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -269,6 +271,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -356,6 +359,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -457,6 +461,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -544,6 +549,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -645,6 +651,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -732,6 +739,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -833,6 +841,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -854,7 +863,6 @@
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Disk Utilisation",
       "tooltip": {
@@ -887,11 +895,7 @@
           "min": null,
           "show": false
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     }
   ],
   "refresh": "10s",

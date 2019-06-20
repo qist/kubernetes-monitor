@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.1.4"
+      "version": "6.2.2"
     },
     {
       "type": "panel",
@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1557233178384,
+  "iteration": 1560998196228,
   "links": [],
   "panels": [
     {
@@ -83,6 +83,7 @@
         "show": false
       },
       "links": [],
+      "options": {},
       "reverseYBuckets": false,
       "targets": [
         {
@@ -145,6 +146,7 @@
         "show": false
       },
       "links": [],
+      "options": {},
       "reverseYBuckets": false,
       "targets": [
         {
@@ -207,6 +209,7 @@
         "show": false
       },
       "links": [],
+      "options": {},
       "reverseYBuckets": false,
       "targets": [
         {
@@ -269,6 +272,7 @@
         "show": false
       },
       "links": [],
+      "options": {},
       "reverseYBuckets": false,
       "targets": [
         {
@@ -331,6 +335,7 @@
         "show": false
       },
       "links": [],
+      "options": {},
       "reverseYBuckets": false,
       "targets": [
         {
@@ -393,6 +398,7 @@
         "show": false
       },
       "links": [],
+      "options": {},
       "reverseYBuckets": false,
       "targets": [
         {
@@ -460,6 +466,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -554,6 +561,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -647,6 +655,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -732,6 +741,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -820,6 +830,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -921,6 +932,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1012,6 +1024,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1112,6 +1125,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1204,6 +1218,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1297,6 +1312,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1390,6 +1406,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1483,6 +1500,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,

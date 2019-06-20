@@ -63,7 +63,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.1.4"
+      "version": "6.2.2"
     },
     {
       "type": "panel",
@@ -102,7 +102,7 @@
   "gnetId": 6876,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1557233335112,
+  "iteration": 1560998015947,
   "links": [],
   "panels": [
     {
@@ -123,6 +123,7 @@
       "hideTimeOverride": true,
       "id": 73,
       "links": [],
+      "options": {},
       "pageSize": 8,
       "repeat": null,
       "repeatDirection": "v",
@@ -343,6 +344,7 @@
       "hideTimeOverride": true,
       "id": 90,
       "links": [],
+      "options": {},
       "pageSize": 8,
       "repeatDirection": "v",
       "scroll": true,
@@ -492,6 +494,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -595,6 +598,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -699,6 +703,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -814,6 +819,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
