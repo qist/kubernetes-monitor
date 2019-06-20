@@ -28,7 +28,7 @@ spec:
       serviceAccountName: kube-state-metrics
       containers:
       - name: kube-state-metrics
-        image: googlecontainer/kube-state-metrics:v1.5.0
+        image: googlecontainer/kube-state-metrics:v1.6.0
         ports:
         - name: http-metrics
           containerPort: 8080
@@ -41,7 +41,7 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 10
       - name: addon-resizer
-        image: juestnow/addon-resizer:1.8.4
+        image: juestnow/addon-resizer:1.8.5
         resources:
           limits:
             cpu: 100m

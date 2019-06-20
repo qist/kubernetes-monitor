@@ -33,6 +33,7 @@ rules:
   - daemonsets
   - deployments
   - replicasets
+  - ingresses
   verbs:
   - list
   - watch
@@ -78,6 +79,20 @@ rules:
   resources:
   - poddisruptionbudgets
   verbs:
+  - list
+  - watch
+- apiGroups: 
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests
+  verbs: 
+  - list
+  - watch
+- apiGroups: 
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs: 
   - list
   - watch
 ---

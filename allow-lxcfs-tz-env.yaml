@@ -1,7 +1,7 @@
 apiVersion: settings.k8s.io/v1alpha1
 kind: PodPreset
 metadata:
-  name: allow-lxcfs
+  name: allow-lxcfs-tz-env
 spec:
   selector:
     matchLabels:
@@ -18,6 +18,8 @@ spec:
       name: proc-swaps
     - mountPath: /proc/uptime
       name: proc-uptime
+    - mountPath: /etc/localtime
+      name: allow-tz-env
         
   volumes:
     - name: proc-cpuinfo
@@ -38,3 +40,6 @@ spec:
     - name: proc-uptime
       hostPath:
         path: /var/lib/lxcfs/proc/uptime
+    - name: allow-tz-env
+      hostPath:
+        path: /usr/share/zoneinfo/Asia/Shanghai
