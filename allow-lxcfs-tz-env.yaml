@@ -5,6 +5,9 @@ metadata:
 spec:
   selector:
     matchLabels:
+  env:
+    - name: TZ
+      value: Asia/Shanghai
   volumeMounts:
     - mountPath: /proc/cpuinfo
       name: proc-cpuinfo
