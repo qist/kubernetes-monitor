@@ -1,7 +1,0 @@
-{
-  "name": "InfluxDB",
-  "type": "InfluxDB",
-  "url": "http://monitoring-influxdb.kube-system:8086",
-  "access": "proxy",
-  "basicAuth": false
-}
