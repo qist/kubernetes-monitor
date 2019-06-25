@@ -15,7 +15,7 @@ spec:
         dashboard: kubernetes-dashboard
       containers:
       - name: influxdb
-        image: juestnow/heapster-influxdb-amd64:v1.5.2
+        image: influxdb
         volumeMounts:
         - mountPath: /data
           name: influxdb-storage
