@@ -17,7 +17,7 @@ spec:
       - name: influxdb
         image: influxdb
         volumeMounts:
-        - mountPath: /data
+        - mountPath: /var/lib/influxdb
           name: influxdb-storage
       volumes:
       - name: influxdb-storage
