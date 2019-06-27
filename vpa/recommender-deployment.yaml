@@ -36,4 +36,37 @@ spec:
             cpu: 50m
             memory: 500Mi
         ports:
-        - containerPort: 8080
+        - name: http-metrics
+          containerPort: 8942
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vpa-recommender
+  namespace: kube-system
+  labels:
+    k8s-app: vpa-recommender
+spec:
+  clusterIP: None
+  ports:
+  - name: http-metrics
+    port: 8942
+    protocol: TCP
+  selector:
+    app: vpa-recommender
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: vpa-recommender
+  namespace: monitoring
+spec:
+  endpoints:
+  - interval: 15s
+    port: http-metrics
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      k8s-app: vpa-recommender

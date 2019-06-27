@@ -30,4 +30,37 @@ spec:
               cpu: 50m
               memory: 500Mi
           ports:
-            - containerPort: 8080
+          - name: http-metrics
+            containerPort: 8943
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vpa-updater
+  namespace: kube-system
+  labels:
+    k8s-app: vpa-updater
+spec:
+  clusterIP: None
+  ports:
+  - name: http-metrics
+    port: 8943
+    protocol: TCP
+  selector:
+    app: vpa-updater
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: vpa-updater
+  namespace: monitoring
+spec:
+  endpoints:
+  - interval: 15s
+    port: http-metrics
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      k8s-app: vpa-updater

@@ -15,7 +15,7 @@ spec:
   version: v1beta1
   versions:
     - name: v1beta1
-      served: false
+      served: true
       storage: false
     - name: v1beta2
       served: true
@@ -57,7 +57,7 @@ spec:
   version: v1beta1
   versions:
     - name: v1beta1
-      served: false
+      served: true
       storage: false
     - name: v1beta2
       served: true
