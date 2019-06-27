@@ -53,7 +53,7 @@ spec:
   ports:
   - name: vpa-webhook
     port: 443
-    protocol: TCP
+    targetPort: 8000
   - name: http-metrics
     port: 8944
     protocol: TCP
