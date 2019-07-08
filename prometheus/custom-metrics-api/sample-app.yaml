@@ -58,6 +58,7 @@ spec:
             cpu: "500m"
         ports:
         - name: http
+          hostPort: 8099
           containerPort: 8080
 ---
 kind: HorizontalPodAutoscaler

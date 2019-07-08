@@ -21,6 +21,7 @@ spec:
         args:
         - "--path.procfs=/host/proc"
         - "--path.sysfs=/host/sys"
+        - "--path.sysfs=/host/sys"
         - "--collector.filesystem.ignored-mount-points=^/(dev|proc|sys|/apps/docker/.+)($|/)"
         - "--collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs)$"
         name: node-exporter
@@ -38,11 +39,15 @@ spec:
             cpu: 250m
         volumeMounts:
         - name: proc
-          readOnly:  true
+          readOnly:  false
           mountPath: /host/proc
         - name: sys
-          readOnly: true
+          readOnly: false
           mountPath: /host/sys
+        - name: root
+          readOnly: true
+          mountPath: /host/root
+          mountPropagation: HostToContainer
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
@@ -50,6 +55,9 @@ spec:
       tolerations:
       - effect: NoSchedule
         operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/ingress
+        operator: Equal
       volumes:
         - name: proc
           hostPath:
@@ -57,3 +65,6 @@ spec:
         - name: sys
           hostPath:
             path: /sys
+        - name: root
+          hostPath:
+            path: /

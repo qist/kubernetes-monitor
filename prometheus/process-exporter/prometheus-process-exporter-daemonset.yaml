@@ -47,6 +47,9 @@ spec:
       tolerations:
       - effect: NoSchedule
         operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/ingress
+        operator: Equal
       volumes:
         - name: proc
           hostPath:
