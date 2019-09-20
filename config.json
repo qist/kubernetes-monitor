@@ -1,62 +1,29 @@
 {
-  "inbounds": [
-    {
-      "port": 80,
-      "listen": "0.0.0.0",
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "0b11e933-1625-4546-962c-f2f8c4ceae69",
-            "alterId": 64
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "path": "/",
-          "headers": {}
-        }
-      },
-      "tag": "",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    }
-  ],
-  "outbounds": [
-    {
-      "protocol": "freedom",
-      "settings": {}
-    },
-    {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
-    }
-  ],
-  "routing": {
-    "rules": [
+  "port": 80,
+  "listen": "0.0.0.0",
+  "protocol": "vmess",
+  "settings": {
+    "clients": [
       {
-        "ip": [
-          "geoip:private"
-        ],
-        "outboundTag": "blocked",
-        "type": "field"
-      },
-      {
-        "outboundTag": "blocked",
-        "protocol": [
-          "bittorrent"
-        ],
-        "type": "field"
+        "id": "0b11e933-1625-4546-962c-f2f8c4ceae69",
+        "alterId": 64
       }
+    ]
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "none",
+    "wsSettings": {
+      "path": "/",
+      "headers": {}
+    }
+  },
+  "tag": "",
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls"
     ]
   }
 }
