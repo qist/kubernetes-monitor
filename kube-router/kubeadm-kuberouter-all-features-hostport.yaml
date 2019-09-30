@@ -8,15 +8,17 @@ metadata:
     k8s-app: kube-router
 data:
   cni-conf.json: |
-    {
+      {
        "cniVersion":"0.3.0",
-       "name":"mynet",
+       "name":"cni0",
        "plugins":[
           {
              "name":"kubernetes",
              "type":"bridge",
              "bridge":"kube-bridge",
              "isDefaultGateway":true,
+             "hairpinMode":true,
+             "mtu":1450,
              "ipam":{
                 "type":"host-local"
              }
@@ -29,7 +31,7 @@ data:
              }
           }
        ]
-    }
+     }
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
@@ -64,7 +66,7 @@ spec:
         - --advertise-external-ip=true 
         - --cluster-asn=64512 
         - --metrics-path=/metrics 
-        - --metrics-port=20244 
+        - --metrics-port=20241 
         - --enable-cni=true 
         - --enable-ibgp=true 
         - --enable-overlay=true 
