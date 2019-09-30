@@ -222,7 +222,7 @@ spec:
   clusterIP: None
   ports:
   - name: http-self
-    port: 20244
+    port: 20241
     protocol: TCP
   selector:
     k8s-app: kube-router
