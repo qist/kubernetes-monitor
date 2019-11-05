@@ -19,7 +19,7 @@ spec:
       serviceAccountName: kube-state-metrics
       containers:
       - name: kube-state-metrics
-        image: googlecontainer/kube-state-metrics:v1.6.0
+        image: juestnow/kube-state-metrics:v1.8.0
         ports:
         - name: http-metrics
           containerPort: 8080
